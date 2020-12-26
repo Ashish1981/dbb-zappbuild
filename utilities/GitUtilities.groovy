@@ -11,7 +11,7 @@ import groovy.transform.*
  * @return boolean		
  */
 def isGitDir(String dir) {
-	String cmd = "git -C $dir rev-parse --is-inside-work-tree"
+	String cmd = "/var/zopenutil/miniconda/bin/git -C $dir rev-parse --is-inside-work-tree"
 	StringBuffer gitResponse = new StringBuffer()
 	StringBuffer gitError = new StringBuffer()
 	boolean isGit = false
@@ -35,7 +35,7 @@ def isGitDir(String dir) {
  * @return String gitBranch     The current Git branch
  */
 def getCurrentGitBranch(String gitDir) {
-	String cmd = "git -C $gitDir rev-parse --abbrev-ref HEAD"
+	String cmd = "/var/zopenutil/miniconda/bin/git -C $gitDir rev-parse --abbrev-ref HEAD"
 	StringBuffer gitBranch = new StringBuffer()
 	StringBuffer gitError = new StringBuffer()
 
@@ -54,7 +54,7 @@ def getCurrentGitBranch(String gitDir) {
  * @return String gitBranch     The current Git branch
  */
 def getCurrentGitDetachedBranch(String gitDir) {
-	String cmd = "git -C $gitDir show -s --pretty=%D HEAD"
+	String cmd = "/var/zopenutil/miniconda/bin/git -C $gitDir show -s --pretty=%D HEAD"
 	StringBuffer gitBranch = new StringBuffer()
 	StringBuffer gitError = new StringBuffer()
 
@@ -82,7 +82,7 @@ def getCurrentGitDetachedBranch(String gitDir) {
  * @param  String gitDir  		Local Git repository directory
  */
 def isGitDetachedHEAD(String gitDir) {
-	String cmd = "git -C $gitDir status"
+	String cmd = "/var/zopenutil/miniconda/bin/git -C $gitDir status"
 	StringBuffer gitStatus = new StringBuffer()
 	StringBuffer gitError = new StringBuffer()
 
@@ -102,7 +102,7 @@ def isGitDetachedHEAD(String gitDir) {
  * @return String gitHash       The current Git hash
  */
 def getCurrentGitHash(String gitDir) {
-	String cmd = "git -C $gitDir rev-parse HEAD"
+	String cmd = "/var/zopenutil/miniconda/bin/git -C $gitDir rev-parse HEAD"
 	StringBuffer gitHash = new StringBuffer()
 	StringBuffer gitError = new StringBuffer()
 
@@ -122,7 +122,7 @@ def getCurrentGitHash(String gitDir) {
  * @return String gitHash       The current Git hash
  */
 def getFileCurrentGitHash(String gitDir, String filePath) {
-	String cmd = "git -C $gitDir rev-list -1 HEAD " + filePath
+	String cmd = "/var/zopenutil/miniconda/bin/git -C $gitDir rev-list -1 HEAD " + filePath
 	StringBuffer gitHash = new StringBuffer()
 	StringBuffer gitError = new StringBuffer()
 
@@ -141,7 +141,7 @@ def getFileCurrentGitHash(String gitDir, String filePath) {
  * @return String gitUrl       The current Git url
  */
 def getCurrentGitUrl(String gitDir) {
-	String cmd = "git -C $gitDir config --get remote.origin.url"
+	String cmd = "/var/zopenutil/miniconda/bin/git -C $gitDir config --get remote.origin.url"
 	StringBuffer gitUrl = new StringBuffer()
 	StringBuffer gitError = new StringBuffer()
 
@@ -162,7 +162,7 @@ def getCurrentGitUrl(String gitDir) {
  * @return String gitHash     The previous Git commit hash
  */
 def getPreviousGitHash(String gitDir) {
-	String cmd = "git -C $gitDir --no-pager log -n 1 --skip=1"
+	String cmd = "/var/zopenutil/miniconda/bin/git -C $gitDir --no-pager log -n 1 --skip=1"
 	StringBuffer gitStdout = new StringBuffer()
 	StringBuffer gitError = new StringBuffer()
 
@@ -177,7 +177,7 @@ def getPreviousGitHash(String gitDir) {
 }
 
 def getChangedFiles(String gitDir, String baseHash, String currentHash) {
-	String cmd = "git -C $gitDir --no-pager diff --name-status $baseHash $currentHash"
+	String cmd = "/var/zopenutil/miniconda/bin/git -C $gitDir --no-pager diff --name-status $baseHash $currentHash"
 	def git_diff = new StringBuffer()
 	def git_error = new StringBuffer()
 	def changedFiles = []
@@ -228,8 +228,8 @@ def getChangedFiles(String gitDir, String baseHash, String currentHash) {
 }
 
 def getCurrentChangedFiles(String gitDir, String currentHash, String verbose) {
-	if (verbose) println "** Running git command: git -C $gitDir show --pretty=format: --name-status $currentHash"
-	String cmd = "git -C $gitDir show --pretty=format: --name-status $currentHash"
+	if (verbose) println "** Running git command: /var/zopenutil/miniconda/bin/git -C $gitDir show --pretty=format: --name-status $currentHash"
+	String cmd = "/var/zopenutil/miniconda/bin/git -C $gitDir show --pretty=format: --name-status $currentHash"
 	def gitDiff = new StringBuffer()
 	def gitError = new StringBuffer()
 	def changedFiles = []
